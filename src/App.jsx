@@ -42,7 +42,6 @@ const score=()=>{let c=0;Q.forEach((q,i)=>{if(ans[i]===q.a)c++;});return Math.ro
 const pick=(i)=>{setAns({...ans,[cq]:i});if(cq<Q.length-1)setCq(cq+1);else finish();};
 const finish=async()=>{setLoading(true);const s=score();const h=await gh(userData.idCard+"-"+s+"-"+Date.now());setTimeout(()=>{setHash(h);const r={...userData,score:s,hash:h,date:new Date().toLocaleString()};const u=[r,...recs];setRecs(u);localStorage.setItem("enahp_db",JSON.stringify(u));setLoading(false);setStep("results");},1500);};
 const rpt=()=>["CERTIFICADO ENAHP","Oficial: "+userData.name,"Cedula: "+userData.idCard,"Resultado: "+score()+"%","Hash: "+hash,"Fecha: "+new Date().toLocaleString(),"Verificado por Zentinel Global Strategy"].join("\n");
-Fecha: "+new Date().toLocaleString();
 const wa=()=>window.open("https://wa.me/?text="+encodeURIComponent(rpt()));
 const em=()=>window.open("mailto:"+miCorreo+"?subject=REPORTE%20ENAHP&body="+encodeURIComponent(rpt()));
 const IC=IM[Q[cq]?.i]||Shield;
